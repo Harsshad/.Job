@@ -1,5 +1,10 @@
 import 'package:dot_job/resources/routes/routes.dart';
 import 'package:dot_job/screens/home_page.dart';
+import 'package:dot_job/screens/job%20seeker/job_seeker_login_screen.dart';
+import 'package:dot_job/screens/job%20seeker/job_seeker_register_screen.dart';
+
+
+
 import 'package:flutter/material.dart';
 
 void main() {
@@ -26,9 +31,9 @@ class MyApp extends StatelessWidget {
       title: '.Job',
       // theme: Provider.of<ThemeProvider>(context).themeData,
       routes: getAppRoutes(),
-      // home: LoginScreen(onTap: (){}),
-      home: HomePage(),
-      
+      // home: HomePage(),
+      // home: JobSeekerRegisterScreen(onTap: (){}),
+      home: JobSeekerLoginScreen(onTap: (){})
     );
   }
 }

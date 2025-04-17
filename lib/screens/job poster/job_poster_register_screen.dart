@@ -2,15 +2,17 @@ import 'package:dot_job/resources/components/my_button.dart';
 import 'package:dot_job/resources/components/my_textfield.dart';
 import 'package:flutter/material.dart';
 
-class RegisterScreen extends StatelessWidget {
+class JobPosterRegisterScreen extends StatelessWidget {
+  final TextEditingController _fullNameController = TextEditingController();
+  final TextEditingController _companyNameController = TextEditingController();
   final TextEditingController _emailController = TextEditingController();
+  final TextEditingController _phoneController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
   final TextEditingController _confirmPwController = TextEditingController();
-  final TextEditingController _fullNameController = TextEditingController();
 
   final void Function()? onTap;
 
-  RegisterScreen({super.key, required this.onTap});
+  JobPosterRegisterScreen({super.key, required this.onTap});
 
   void register(BuildContext context) {
     if (_passwordController.text != _confirmPwController.text) {
@@ -22,18 +24,17 @@ class RegisterScreen extends StatelessWidget {
         ),
       );
     } else {
-      // Simulate success
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('Registration successful!')),
+        const SnackBar(content: Text('Job Poster Registration successful!')),
       );
-      Navigator.pushReplacementNamed(context, '/login');
+      Navigator.pushReplacementNamed(context, '/job-poster-login');
     }
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xFF121212), // Dark background
+      backgroundColor: const Color(0xFF121212),
       body: Center(
         child: SingleChildScrollView(
           child: ConstrainedBox(
@@ -44,10 +45,10 @@ class RegisterScreen extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   const SizedBox(height: 40),
-                  const Icon(Icons.person_add, size: 100, color: Colors.cyanAccent),
+                  const Icon(Icons.business, size: 100, color: Colors.cyanAccent),
                   const SizedBox(height: 20),
                   const Text(
-                    "Let's create an account for you!",
+                    "Create your Job Poster account!",
                     style: TextStyle(
                       color: Colors.white,
                       fontSize: 20,
@@ -56,7 +57,6 @@ class RegisterScreen extends StatelessWidget {
                   ),
                   const SizedBox(height: 30),
 
-                  // Full Name
                   MyTextfield(
                     hintText: 'Full Name',
                     obscureText: false,
@@ -65,22 +65,30 @@ class RegisterScreen extends StatelessWidget {
                   ),
                   const SizedBox(height: 12),
 
-                  // Email
+                  MyTextfield(
+                    hintText: 'Company Name',
+                    obscureText: false,
+                    controller: _companyNameController,
+                    focusNode: FocusNode(),
+                  ),
+                  const SizedBox(height: 12),
+
                   MyTextfield(
                     hintText: 'Email',
                     obscureText: false,
                     controller: _emailController,
                     focusNode: FocusNode(),
-                    validator: (value) {
-                      if (value == null || value.isEmpty) return 'Email is required';
-                      if (!RegExp(r'^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$')
-                          .hasMatch(value)) return 'Enter a valid email';
-                      return null;
-                    },
                   ),
                   const SizedBox(height: 12),
 
-                  // Password
+                  MyTextfield(
+                    hintText: 'Phone Number',
+                    obscureText: false,
+                    controller: _phoneController,
+                    focusNode: FocusNode(),
+                  ),
+                  const SizedBox(height: 12),
+
                   MyTextfield(
                     hintText: 'Password',
                     obscureText: true,
@@ -89,7 +97,6 @@ class RegisterScreen extends StatelessWidget {
                   ),
                   const SizedBox(height: 12),
 
-                  // Confirm Password
                   MyTextfield(
                     hintText: 'Confirm Password',
                     obscureText: true,
@@ -98,39 +105,18 @@ class RegisterScreen extends StatelessWidget {
                   ),
                   const SizedBox(height: 25),
 
-                  // Register Button
                   MyButton(
-                    text: "Register Here",
+                    text: "Register",
                     onTap: () => register(context),
                   ),
                   const SizedBox(height: 25),
 
-                  // Already have account
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      const Text("Already have an account? ",
-                          style: TextStyle(color: Colors.grey)),
+                      const Text("Already a Job Poster? ", style: TextStyle(color: Colors.grey)),
                       GestureDetector(
-                        onTap: onTap,
-                        child: const Text(
-                          "Login now",
-                          style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                            color: Colors.cyanAccent,
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-                  const SizedBox(height: 8),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      const Text("Already a Member? ",
-                          style: TextStyle(color: Colors.grey)),
-                      GestureDetector(
-                        onTap: () => Navigator.pushNamed(context, '/register'),
+                        onTap: ()=> Navigator.pushNamed(context,'/job-poster-login'),
                         child: const Text(
                           "Login here",
                           style: TextStyle(

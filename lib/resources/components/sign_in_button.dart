@@ -1,4 +1,5 @@
 
+import 'package:dot_job/resources/constants/constants.dart';
 import 'package:flutter/material.dart';
 
 
@@ -19,10 +20,10 @@ class SignInButton extends StatelessWidget {
         //     Navigator.pushNamed(context, '/home');
         //   }
         // },
-        // icon: Image.asset(
-        //   Constants.google,
-        //   width: 35,
-        // ),
+        icon: Image.asset(
+          Constants.google,
+          width: 35,
+        ),
         label: const Text(
           'Continue with Google',
           style: TextStyle(
